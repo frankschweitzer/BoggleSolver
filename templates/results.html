@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boggle Results</title>
+</head>
+<body>
+    <h1>Valid Words:</h1>
+    <ul>
+        {% for word in valid_words %}
+        <li>{{ word }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

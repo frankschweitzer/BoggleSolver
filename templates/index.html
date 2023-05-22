@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle Solver</title>
+    
+    <style>
+        body {
+            background-color: azure;
+        }
+        header {
+            margin-top: 1cm;
+            color:midnightblue;
+            text-align: center;
+            font-size: 70px;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+        table, th, td {
+            border: 1px solid midnightblue;
+            font-size: 60px;
+            text-align: center;
+            margin-top: 50px;
+            color: midnightblue;
+        }
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+            width: 70%;
+        }
+        button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 40px;
+            font-size: 35px;
+            color: midnightblue;
+            cursor: pointer;
+        }
+        .table-input {
+            border: none;
+            background-color: transparent; 
+            text-align: center; 
+            font-size: 36px;
+            padding: 5px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            outline: none;
+        }
+        .table-input:hover, .table-input:focus {
+            background-color: azure;
+        }
+          
+    </style>
+
+</head>
+<body>
+    <header>Boggle</header>
+    <form action="/process" method="POST">
+        <div>
+          <table class="center">
+            <tr>
+              <td><input type="text" name="row-0-col-0" class="table-input"></td>
+              <td><input type="text" name="row-0-col-1" class="table-input"></td>
+              <td><input type="text" name="row-0-col-2" class="table-input"></td>
+              <td><input type="text" name="row-0-col-3" class="table-input"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="row-1-col-0" class="table-input"></td>
+                <td><input type="text" name="row-1-col-1" class="table-input"></td>
+                <td><input type="text" name="row-1-col-2" class="table-input"></td>
+                <td><input type="text" name="row-1-col-3" class="table-input"></td>
+              </tr>
+              <tr>
+                <td><input type="text" name="row-2-col-0" class="table-input"></td>
+                <td><input type="text" name="row-2-col-1" class="table-input"></td>
+                <td><input type="text" name="row-2-col-2" class="table-input"></td>
+                <td><input type="text" name="row-2-col-3" class="table-input"></td>
+              </tr>
+              <tr>
+                <td><input type="text" name="row-3-col-0" class="table-input"></td>
+                <td><input type="text" name="row-3-col-1" class="table-input"></td>
+                <td><input type="text" name="row-3-col-2" class="table-input"></td>
+                <td><input type="text" name="row-3-col-3" class="table-input"></td>
+              </tr>
+          </table>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+
+</body>
+</html>
