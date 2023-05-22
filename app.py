@@ -5,8 +5,8 @@ def main():
     words = find_words(board)
     english_words, word_map = get_english_words()
     valid_words = check_words(words, english_words)
-    for valid in valid_words:
-        print(valid, word_map.get(valid)+'\n')
+    valid_words.sort()
+    print(valid_words)
 
 # Obtain list of all english words
 def get_english_words():
@@ -19,6 +19,8 @@ def get_english_words():
             if len(words) > 1: 
                 if "abbr." not in words: 
                     word = words[0].upper()
+                    if word[-1].isdigit():
+                        word = word[0:-1]
                     map.update({word:sentence})
                     word_list.append(word)
     return word_list, map
