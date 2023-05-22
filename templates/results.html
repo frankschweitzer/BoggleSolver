@@ -1,14 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boggle Results</title>
+    <style>
+        body {
+            background-color: azure;
+        }
+        header {
+            margin-top: 1cm;
+            color:midnightblue;
+            text-align: center;
+            font-size: 70px;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+        div {
+            margin-top: 15px;
+            align-items: center;
+            color: midnightblue;
+        }
+        .word-columns {
+            columns: 3; /* Adjust the number of columns as needed */
+            column-gap: 20px; /* Adjust the column gap as needed */
+        }
+    </style>
 </head>
 <body>
-    <h1>Valid Words:</h1>
-    <ul>
-        {% for word in valid_words %}
-        <li>{{ word }}</li>
-        {% endfor %}
-    </ul>
+    <header>Valid Words</header>
+    <div class="word-columns">
+        <ul>
+            {% for word in valid_words %}
+            <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 </body>
 </html>

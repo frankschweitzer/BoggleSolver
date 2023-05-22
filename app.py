@@ -4,13 +4,11 @@ app = Flask(__name__)
 
 
 def main(board):
-    words = find_words(board)
-    # word_map, eng_words = get_english_words()
     word_set = get_boggle_words()
-    words = find_words(board, word_set)
-    # valid_words = check_words(words, eng_words)
-    # return valid_words
-    return words
+    words = find_words(board)
+    valid_words = check_words(words, word_set)
+    print(valid_words)
+    return valid_words
     
 
 @app.route('/')
@@ -32,44 +30,29 @@ def process():
     return render_template('results.html', valid_words=valid_words)
 
 
-# Obtain list of all english words
-# def get_english_words():
-#     map = {}
-#     eng_words = set()
-#     word_list = []
-#     with open("OxfordDictionary.txt", "r") as file:
-#         for line in file:
-#             sentence = line.strip()
-#             words = sentence.split(" ")
-#             if len(words) > 1: 
-#                 if "abbr." not in words: 
-#                     word = words[0].upper()
-#                     if word[-1].isdigit():
-#                         word = word[0:-1]
-#                     map.update({word:sentence})
-#                     eng_words.add(word)
-#                     word_list.append(word)
-#     # took out map to be returned
-#     return map, eng_words
-
 def get_boggle_words():
     words = set()
-    with open("words-list.txt", "r") as file:
+    with open("word-list.txt", "r") as file:
         for line in file:
-            words.add(line)
-            print(line)
+            if "\n" in line:
+                word = line.rstrip('\n')
+            else:
+                word = line
+            words.add(word)
     return words
 
 # Return words in english language - words that have numbers in them may not work as well
-# def check_words(word_list, english_words):
-#     valid = set()
-#     for word in word_list:
-#         if word in english_words:
-#             valid.add(word)
-#     return valid
+def check_words(word_list, word_set):
+    valid = set()
+    for word in word_list:
+        word = word.lower()
+        if word in word_set:
+            word = word.capitalize()
+            valid.add(word)
+    return valid
 
 
-def dfs(grid, i, j, visited, word, words, word_map):
+def dfs(grid, i, j, visited, word, words):
     # Mark the current cell as visited
     visited[i][j] = True
 
@@ -77,7 +60,7 @@ def dfs(grid, i, j, visited, word, words, word_map):
     word += grid[i][j]
 
     # Add the word to the list of words if it exists in the dictionary
-    if len(word) > 2 and word in word_map:
+    if len(word) > 2:
         words.append(word)
 
     # Define the possible moves in the grid
@@ -90,21 +73,20 @@ def dfs(grid, i, j, visited, word, words, word_map):
 
         # Check if the neighboring cell is within the grid boundaries and not visited
         if 0 <= new_i < len(grid) and 0 <= new_j < len(grid) and not visited[new_i][new_j]:
-            dfs(grid, new_i, new_j, visited, word, words, word_map)
+            dfs(grid, new_i, new_j, visited, word, words)
 
     # Mark the current cell as unvisited for future iterations
     visited[i][j] = False
 
 
 # Function to find all possible words in the grid
-def find_words(grid, word_map):
+def find_words(grid):
     words = []
     visited = [[False for _ in range(len(grid))] for _ in range(len(grid))]
-
     # Iterate over each cell in the grid and start the DFS
     for i in range(len(grid)):
         for j in range(len(grid)):
-            dfs(grid, i, j, visited, '', words, word_map)
+            dfs(grid, i, j, visited, '', words)
 
     return words
 
